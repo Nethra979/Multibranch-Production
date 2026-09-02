@@ -1574,13 +1574,6 @@ def get_cart():
 
 
 
-@app.route("/checkout", methods=["POST"])
-def checkout():
-    if 'cart' in session:
-        session['cart'] = []
-        return jsonify({'success': True, 'message': 'Order placed successfully!'})
-    
-    return jsonify({'success': False, 'message': 'Cart is empty!'})
 
 # Review routes (from FeatureA)
 @app.route("/add_review", methods=["POST"])
