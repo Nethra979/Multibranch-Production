@@ -84,10 +84,14 @@ products = [
     }
 ]
 
+
 # In-memory storage (use database in production)
 product_reviews = {}
 orders = {}
 user_profiles = {}
+
+product_reviews = {}
+
 
 HTML_TEMPLATE = """
 <!DOCTYPE html>
@@ -103,7 +107,11 @@ HTML_TEMPLATE = """
             transform: translateY(-5px);
             transition: all 0.3s ease;
         }
+
         .cart-badge, .wishlist-badge, .orders-badge {
+
+        .cart-badge, .wishlist-badge {
+
             position: absolute;
             top: -8px;
             background: #ef4444;
@@ -121,10 +129,12 @@ HTML_TEMPLATE = """
             left: -8px;
             right: auto;
         }
+
         .orders-badge {
             background: #8b5cf6;
             right: -8px;
         }
+
         .search-box:focus {
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
@@ -147,6 +157,7 @@ HTML_TEMPLATE = """
             font-size: 12px;
             font-weight: bold;
         }
+
         .order-progress {
             height: 8px;
             border-radius: 4px;
@@ -168,6 +179,8 @@ HTML_TEMPLATE = """
         .user-menu {
             transition: all 0.3s ease;
         }
+
+
     </style>
 </head>
 <body class="bg-gray-50">
@@ -191,6 +204,7 @@ HTML_TEMPLATE = """
                     </div>
                 </div>
 
+
                 <!-- User Menu -->
                 <div class="flex space-x-4">
                     <!-- Orders Icon -->
@@ -201,6 +215,9 @@ HTML_TEMPLATE = """
                         </button>
                     </div>
                     
+<!-- Cart & Wishlist Icons -->
+                <div class="flex space-x-4">
+
                     <!-- Wishlist Icon -->
                     <div class="relative">
                         <button onclick="toggleWishlist()" class="p-2 text-gray-600 hover:text-red-500 relative">
@@ -216,6 +233,7 @@ HTML_TEMPLATE = """
                             <span id="cartCount" class="cart-badge">0</span>
                         </button>
                     </div>
+
 
                     <!-- User Profile -->
                     <div class="relative">
@@ -240,6 +258,8 @@ HTML_TEMPLATE = """
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -250,19 +270,28 @@ HTML_TEMPLATE = """
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to ShopEasy</h1>
             <p class="text-xl mb-8">Discover amazing products at great prices</p>
+
             <div class="flex justify-center space-x-4 flex-wrap gap-4">
+
+            <div class="flex justify-center space-x-4">
+
                 <button onclick="scrollToProducts()" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
                     Start Shopping
                 </button>
                 <button onclick="scrollToNewFeature()" class="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition duration-300">
+
                     <i class="fas fa-shipping-fast mr-2"></i>New: Order Tracking
                 </button>
                 <button onclick="showLoginModal()" class="bg-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300">
                     <i class="fas fa-user-plus mr-2"></i>Create Account
+
+                    <i class="fas fa-star mr-2"></i>New: Enhanced Cart & Wishlist
+
                 </button>
             </div>
         </div>
     </section>
+
 
     <!-- NEW FEATURE: Order Tracking & User Accounts -->
     <section id="newFeatures" class="max-w-7xl mx-auto px-4 py-12">
@@ -408,6 +437,45 @@ HTML_TEMPLATE = """
                 </div>
             </div>
             {% endfor %}
+
+    <!-- NEW FEATURE: Enhanced Shopping Features -->
+    <section id="newFeatures" class="max-w-7xl mx-auto px-4 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-shopping-cart text-blue-500 mr-2"></i>
+                Enhanced Shopping Experience
+            </h2>
+            <p class="text-gray-600 text-lg">New features to make your shopping better!</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Feature 1: Wishlist -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-green-200">
+                <div class="text-center mb-4">
+                    <i class="fas fa-heart text-red-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Save for Later</h3>
+                </div>
+                <p class="text-gray-600 text-center">Add items to your wishlist and come back to them later. Never forget what you wanted!</p>
+            </div>
+
+            <!-- Feature 2: Stock Status -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-blue-200">
+                <div class="text-center mb-4">
+                    <i class="fas fa-box text-blue-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Real-time Stock</h3>
+                </div>
+                <p class="text-gray-600 text-center">See which items are in stock and which are out of stock before adding to cart.</p>
+            </div>
+
+            <!-- Feature 3: Product Features -->
+            <div class="bg-white p-6 rounded-lg shadow-md border border-purple-200">
+                <div class="text-center mb-4">
+                    <i class="fas fa-list-check text-purple-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Detailed Features</h3>
+                </div>
+                <p class="text-gray-600 text-center">View all product features and specifications before making a decision.</p>
+            </div>
+
         </div>
     </section>
 
@@ -536,6 +604,7 @@ HTML_TEMPLATE = """
         </div>
     </div>
 
+
     <!-- NEW: Orders Sidebar -->
     <div id="ordersSidebar" class="fixed top-0 right-0 h-full w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
@@ -592,6 +661,11 @@ HTML_TEMPLATE = """
     <div id="ordersOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleOrders()"></div>
     <div id="loginOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="hideLoginModal()"></div>
 
+    <!-- Overlays -->
+    <div id="cartOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleCart()"></div>
+    <div id="wishlistOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" onclick="toggleWishlist()"></div>
+
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
@@ -607,6 +681,7 @@ HTML_TEMPLATE = """
     <script>
         let cart = [];
         let wishlist = [];
+
         let orders = [];
         let currentUser = null;
         let currentRatings = {};
@@ -620,6 +695,12 @@ HTML_TEMPLATE = """
                     updateUserUI();
                 });
             
+
+        let currentRatings = {};
+        
+        // Load cart and wishlist from session
+        function loadData() {
+
             fetch('/get_cart')
                 .then(response => response.json())
                 .then(data => {
@@ -634,6 +715,7 @@ HTML_TEMPLATE = """
                     updateWishlistUI();
                     updateWishlistIcons();
                 });
+
             
             fetch('/get_orders')
                 .then(response => response.json())
@@ -938,6 +1020,11 @@ HTML_TEMPLATE = """
         }
 
         // Wishlist functions (from FeatureB)
+
+        }
+
+        // Wishlist functions
+
         function toggleWishlistItem(productId) {
             fetch('/toggle_wishlist', {
                 method: 'POST',
@@ -1053,7 +1140,11 @@ HTML_TEMPLATE = """
             overlay.classList.toggle('hidden');
         }
 
+
         // Cart functions
+
+        // Existing cart functions (keep them as they are)
+
         function addToCart(productId) {
             fetch('/add_to_cart', {
                 method: 'POST',
@@ -1152,7 +1243,9 @@ HTML_TEMPLATE = """
             overlay.classList.toggle('hidden');
         }
 
+
         // Utility functions
+
         function filterProducts(category) {
             const products = document.querySelectorAll('.product-card');
             products.forEach(product => {
@@ -1201,6 +1294,7 @@ HTML_TEMPLATE = """
             }, 3000);
         }
 
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             loadUserData();
@@ -1210,11 +1304,37 @@ HTML_TEMPLATE = """
                     document.getElementById('userMenu').classList.add('hidden');
                 }
             });
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!', 'error');
+                return;
+            }
+            
+            fetch('/checkout', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Order placed successfully!', 'success');
+                    cart = [];
+                    updateCartUI();
+                    toggleCart();
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+
         });
     </script>
 </body>
 </html>
 """
+
 
 # Routes for FeatureC: User Accounts & Order Tracking
 @app.route("/register", methods=["POST"])
@@ -1304,6 +1424,11 @@ def checkout():
     return jsonify({'success': True, 'message': 'Order placed successfully!', 'order_id': order_id})
 
 # Routes for FeatureB: Wishlist
+
+# Existing routes (cart, reviews) remain the same...
+
+# NEW FEATURE: Wishlist routes
+
 @app.route("/toggle_wishlist", methods=["POST"])
 def toggle_wishlist():
     if 'wishlist' not in session:
@@ -1345,6 +1470,7 @@ def clear_wishlist():
     session['wishlist'] = []
     return jsonify({'success': True, 'wishlist': []})
 
+
 # Routes for FeatureA: Reviews
 @app.route("/add_review", methods=["POST"])
 def add_review():
@@ -1373,6 +1499,9 @@ def get_reviews():
     return jsonify(reviews)
 
 # Routes for Cart (Base Feature)
+
+# Keep all other existing routes (cart, reviews, etc.)
+
 @app.route("/")
 def home():
     return render_template_string(HTML_TEMPLATE, products=products)
@@ -1443,5 +1572,43 @@ def update_quantity():
 def get_cart():
     return jsonify(session.get('cart', []))
 
+
+
+@app.route("/checkout", methods=["POST"])
+def checkout():
+    if 'cart' in session:
+        session['cart'] = []
+        return jsonify({'success': True, 'message': 'Order placed successfully!'})
+    
+    return jsonify({'success': False, 'message': 'Cart is empty!'})
+
+# Review routes (from FeatureA)
+@app.route("/add_review", methods=["POST"])
+def add_review():
+    data = request.get_json()
+    product_id = data.get('product_id')
+    rating = data.get('rating')
+    text = data.get('text')
+    author = data.get('author', 'Anonymous')
+    
+    if product_id not in product_reviews:
+        product_reviews[product_id] = []
+    
+    product_reviews[product_id].append({
+        'rating': rating,
+        'text': text,
+        'author': author,
+        'timestamp': datetime.now().isoformat()
+    })
+    
+    return jsonify({'success': True})
+
+@app.route("/get_reviews")
+def get_reviews():
+    product_id = request.args.get('product_id', type=int)
+    reviews = product_reviews.get(product_id, [])
+    return jsonify(reviews)
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
+        app.run(host="0.0.0.0", port=5000, debug=False)
