@@ -1575,32 +1575,7 @@ def get_cart():
 
 
 
-# Review routes (from FeatureA)
-@app.route("/add_review", methods=["POST"])
-def add_review():
-    data = request.get_json()
-    product_id = data.get('product_id')
-    rating = data.get('rating')
-    text = data.get('text')
-    author = data.get('author', 'Anonymous')
-    
-    if product_id not in product_reviews:
-        product_reviews[product_id] = []
-    
-    product_reviews[product_id].append({
-        'rating': rating,
-        'text': text,
-        'author': author,
-        'timestamp': datetime.now().isoformat()
-    })
-    
-    return jsonify({'success': True})
 
-@app.route("/get_reviews")
-def get_reviews():
-    product_id = request.args.get('product_id', type=int)
-    reviews = product_reviews.get(product_id, [])
-    return jsonify(reviews)
 
 
 if __name__ == "__main__":
