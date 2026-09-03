@@ -1573,9 +1573,5 @@ def get_cart():
     return jsonify(session.get('cart', []))
 
 
-    
-    return jsonify({'success': False, 'message': 'Cart is empty!'})
-
-
 if __name__ == "__main__":
         app.run(host="0.0.0.0", port=5000, debug=False)
