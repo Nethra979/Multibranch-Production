@@ -1573,12 +1573,6 @@ def get_cart():
     return jsonify(session.get('cart', []))
 
 
-
-@app.route("/checkout", methods=["POST"])
-def checkout():
-    if 'cart' in session:
-        session['cart'] = []
-        return jsonify({'success': True, 'message': 'Order placed successfully!'})
     
     return jsonify({'success': False, 'message': 'Cart is empty!'})
 
